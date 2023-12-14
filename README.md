@@ -18,7 +18,7 @@ export infuraPolygonEndpoint=https://polygon-mainnet.infura.io/v3/ff89...<infura
 export pvtKey=8efdb...<your_wallet_private_key>
 ```
 * infura API KEY 註冊：https://www.infura.io/ （記得要開啟polygon mainnet）
-* 簡易錢包生成工具：https://mct.xyz/create-wallet?chain=matic（建議勿使用於生產環境）
+* 簡易錢包生成工具：https://mct.xyz/create-wallet?chain=matic （建議勿使用於生產環境）
 
 ##### 3.1 直接執行
 ``` bash
