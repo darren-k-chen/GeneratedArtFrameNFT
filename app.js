@@ -24,12 +24,21 @@ async function genNFT(to_addr) {
     try {
         const receipt = await contract.methods.mint(to_addr).send({ 
             from: account.address,
-            gas: '123456'
+            gas: '123456',
+            gasPrice: '888888888888'
         }); console.log(receipt);
     } catch (error) {console.error('Error in write operation:', error);}
 }
 
-app.use(express.json({ limit: '10mb' }));
+let nftQueue = [];
+async function processQueue() {
+    while (nftQueue.length > 0) {
+        const to_addr = nftQueue.shift();  // 取出隊列中的第一個地址
+        await genNFT(to_addr);  // 調用 genNFT 並等待完成
+    }
+} setInterval(processQueue, 1000);
+
+app.use(express.json({ limit: '88mb' }));
 app.use(express.static('metadata'));
 
 app.post('/genNFT', (req, res) => {
@@ -91,7 +100,8 @@ app.post('/genNFT', (req, res) => {
                     console.log(`json data has been save to: ${filePath}`);
                     console.log(uriData);               
                 } 
-            }); genNFT(data.to); res.status(200).send(uriData);
+            }); // genNFT(data.to); 
+            nftQueue.push(data.to); res.status(200).send(uriData);
         } else res.status(400).send('錯誤的請求格式');
     } catch (error) {console.error('API ERROR:', error);}
 });
