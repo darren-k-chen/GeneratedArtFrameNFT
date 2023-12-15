@@ -27,6 +27,6 @@ node app.js
 
 ##### 3.2 背景執行
 ``` bash
-sudo npm install forever -g
+npm install forever -g
 forever start app.js
 ```
